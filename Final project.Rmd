@@ -1,0 +1,259 @@
+---
+title: Explore the factors that influence the performance of doctors in the online
+  healthcare community
+Author: '111'
+output:
+  pdf_document: 
+    fig_height: 4.3
+    number_sections: yes
+  html_document: default
+  word_document: default
+---
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+library(corrgram)
+library(ggplot2)
+library(kableExtra)
+library(gridExtra)
+library(dplyr)
+library(devtools)
+library(cowplot)
+```
+
+
+**Key words**: Online Healthcare Service Performance; Influencing Factors; Consulting Price; Multiple regression model 
+
+
+# Introduction 
+## Background
+Online healthcare community, also known as Internet medicine, is a new application of the Internet in the medical industry. Doctors can through online medical community to establish contact with the patient, provide patients with text, graphic and telephone counseling and referral, remote clinic, appointment booking after management, the family doctor service, can not only convenient real-time control over his patient, also can increase accordingly the doctor's personal awareness, make its get corresponding remuneration [1-3]. Online medical community (Internet medical) uses the Internet and information technology to break the time and space constraints, help patients quickly and correctly recognize their own conditions and quickly seek medical treatment, and relieve the tension and lack of offline medical services [1].  
+  
+Based on this, this paper studies the factors affecting doctors' performance in the online medical platform from the perspective of patients. On the online medical platform, patients decide whether to ask for help from a doctor by looking at the doctor's information displayed on the web page. Therefore, factors such as the professional title of doctors and the patients served will have a guiding effect on whether patients choose doctors or not. At the same time, when doctors provide medical help to patients, they will charge a certain fee. Take a good doctor on the online medical website as an example, doctors have three types of services: question-and-answer, graphic consultation and telephone consultation. The prices of consultation services vary according to the different types of services and doctors. The price of service will affect the number of patients a doctor serves, which in turn will affect the doctor's performance. The purpose of this study is to take Haofu Online medical website as an example, to explore the factors affecting the performance of doctors in the online medical platform, and to provide a theoretical basis for the healthy development of China's online medical community. For patients, by integrating the useful information scattered in the virtual network, they can enjoy high-quality medical services more conveniently and quickly, and gain good medical experience, thus establishing doctor-patient trust. For doctors, they can understand the medical needs of online patients and provide personalized and high-quality medical services. For online medical community operators, they can understand the demands of doctors and patients, improve the operation and management system, and promote the sustainable and healthy development of online medical cause.  
+
+## Literature review
+The theory of information asymmetry mainly refers to the fact that in market activities, the parties involved in the transaction have different information and influence on the transaction or service, and the party with less information is in a disadvantaged position in the transaction. Generally speaking, the product provider has more information than the buyer and can help the provider gain trading advantage [6]. In the online medical platform, doctors are in the information advantage. Compared with patients, they know more about the diagnosis and treatment plan of the disease, while patients know less about the technology and professional ethics of doctors. Therefore, it is impossible to judge whether the treatment plan of doctors is appropriate. Although the online medical platform can help doctors make use of their spare time and alleviate the shortage of existing medical resources in China from two aspects of time and space, according to the information asymmetry theory, doctors will guide patients to make decisions in favor of doctors when conducting online medical consultation. As patients are at the disadvantage of information, when using online medical platform, they can only communicate with doctors by text and voice, and cannot judge the degree of concern and understanding of patients' condition. In this case, the medical advice received by patients from doctors is somewhat blind [7]. At the same time, because doctors are on the information advantage side, control the pricing power of medical services.
+
+Peter Drucker first put forward the concept of customer perception in 1954. Weingand (1997) divided customer perception into four levels: basic value, expected value, expected value and expected value. Carrolll J M (2011) proposed in his study that perceived value can improve patients' trust in doctors, thus improving doctors' personal performance. In the online medical platform, patients, as customers, can learn about the factors affecting the consultation price, such as doctor qualification and platform reputation, through the introduction on the web page. On the other hand, after receiving the service, patients will judge the expected effect and diagnosis process according to their own conditions, and then give feedback and evaluation through the online medical platform, thus affecting the perception and choice of other consumers and affecting the work performance and personal performance of doctors [8].
+
+According to walters' research, price has a direct impact on performance [9]. In online medical platform, service price has two influences on doctors' performance. On the one hand, when the price of doctors' services is low, patients are more inclined to buy consulting services, thus increasing the number of patients served by doctors and improving performance. On the other hand, if doctors can bring patients higher perceived value, such as higher qualifications and richer experience, patients can accept higher service fees than other doctors, so doctors can set higher service prices.
+
+
+
+# Method
+## Methodology
+In this paper, multiple linear regression will be used to examine the factors affecting physician performance. Relevant hypothesis testing and suggestions are proposed based on the regression results of the model. Furthermore, stepwise linear regression was used to explore the best model.  
+
+## Hypothesis
+According to previous studies, the number of thank-you letters, the number of gifts, and the popularity of recommendations are all reputational feedback variables, and the level of reputational feedback variables can reflect the quality of a doctor's reputation. When doctors have good reputational feedback, patients will believe that doctors can provide better medical services for patients who have purchased services, including accurate disease diagnosis and effective treatment [4]. Therefore, every specific variable in the reputation feedback variable can improve the performance of doctors on the online medical platform. Based on this, we propose the following hypothesis:  
+**H1: The number of thanks letters has a positive impact on the performance of doctors on online medical platforms.**  
+**H2: The number of gifts has a positive impact on the performance of doctors on online medical platforms.**   
+**H3: Popular has a positive effect on the performance of doctors on online medical platforms.**  
+  
+Articles published by doctors can not only show their own professional knowledge and relevant treatment experience, but also gain more attention and trust from patients [5]. In the online medical community, doctors, as the main body of online medical services, obtain economic benefits and online popularity by publishing medical science articles. By browsing the articles displayed on doctors' personal home pages, patients have a certain cognition of doctors' medical knowledge and scientific research ability, so patients are sensitive to the articles published by doctors and the number of articles. The number of published articles can measure the educational learning ability of doctors to a certain extent. The stronger the ability is, the richer the mastery of relevant medical knowledge will be, and the higher the corresponding service performance will be. Therefore, this paper takes the number of articles published by doctors as an indicator to influence doctors' performance. Based on this, we propose the following hypothesis:  
+**H4: The number of published articles has a positive impact on the performance of doctors on online medical platforms.**  
+
+Users in the medical profession, doctors voting, the voting results can directly show the patient's attitude to the doctor's degree of satisfaction, satisfaction is higher, the doctor just like to be patient, the higher authority, and some in the social status of the improved according to the above analysis theory, the attitude to the doctor's degree of satisfaction in the field of medical image, show their status so this variable will affect their performance in the medical profession. Based on this, we propose the following hypothesis:  
+**H5: Attitude satisfaction has a positive impact on the performance of doctors in online medical platform **  
+  
+In online medical treatment, doctors will choose a price strategy that matches their own medical strength and effort, and doctors with higher degree of professionalism, faster response in doctor-patient interaction and focus on content output of business ability will get a higher price. Therefore, in online medical services, the higher the price of doctors' services, the lower the purchase intention of patients. Based on this, we propose the following hypothesis:  
+**H6: Service price has a negative impact on the performance of doctors on the online medical platform.**  
+  
+The time for a doctor to open a personal website is a measure of the time for doctors to provide medical services in the online medical community. The earlier a doctor opens a personal website, the longer the cumulative exposure time for patients on the Internet, the more likely it is to serve more patients and create more performance. Based on this, we propose the following hypothesis:  
+**H7: The opening days have a positive influence on the performance of doctors on online medical platform.** 
+  
+# Analysis
+## Data sample 
+The sample data used in this paper are all from the online medical platform named HaoDF (www.haodf.com ). I collected a total of **779** doctors' personal web pages from the Good Doctor online platform. In the study, the number of patients served by the doctor was used as the doctor's performance, and the data field influencing the doctor's performance was found from the personal web page for recording. Specific selection of the following eight types of independent variables:  
+  1. Letter: The number of thanks letters  
+  2. Gift: The number of gifts  
+  3. Popular: The popular number on the website  
+  4. Article: The number of published articles  
+  5. AttitudeSatisfaction: Attitude Satisfaction  
+  6. Price: The price of consultation  
+  7. Days: The number of open days  
+
+## EDA 
+### summary
+Once you have the data, first look at the overview of the data. As you can see from the summary output, all of the variable data types are numeric. Note that the maximum value of the Sentiment variable is 1. And the results show that there is no missing data.  
+```{r, echo=FALSE}
+data = read.csv("data.csv") 
+summary(data)
+```
+
+### Variable correlation 
+To see the relationships between variables, I drew a variable correlation diagram. In this figure, the names of variables are on the diagonals. The lower left part is a scatter diagram of two variables to see the relationship between variables. The upper right is the Pearson correlation between the two variables.  
+We can draw two conclusions from the figure. First, independent variables and dependent variables do have a correlation, and some variables have a strong correlation. Second, the correlation between independent variables is not strong, that is, the problem of collinearity of independent variables is preliminarily excluded.  
+``` {r,echo=FALSE}
+panel.cor <- function(x, y, ...){
+  par(usr = c(0, 1, 0, 1))  
+  txt <- as.character(format(cor(x, y), digits = 2)) 
+  text(0.5, 0.5, txt)   
+}
+pairs(data, upper.panel = panel.cor,col='blue')
+```
+
+
+In order to further demonstrate the Pearson correlation coefficient between variables, I established the correlation coefficient matrix.  
+``` {r,echo=FALSE}
+cor(data)
+```
+
+### Variable distribution
+An important assumption of linear regression is that the variables are normally distributed. In this part, I'm going to check to see if the data is normally distributed. The variable that does not accord with normal distribution is rectified.  
+  
+1. **Performance Variable. **This variable is left-skewed and needs to be treated logarithmically. As can be seen from the figure below, the corrected data distribution basically conforms to the normal distribution.  
+
+2. **Letter. **This variable is left-skewed and needs to be treated logarithmically. As can be seen from the figure below, the corrected data distribution basically conforms to the normal distribution.  
+
+3. **Gift. **This variable is left-skewed and needs to be treated logarithmically. As can be seen from the figure below, the corrected data distribution basically conforms to the normal distribution.  
+
+4. **Popular. **This variable basically conforms to the normal distribution and does not need to be processed.  
+
+5. **Article. **This variable is left-skewed and needs to be treated logarithmically. As can be seen from the figure below, the corrected data distribution basically conforms to the normal distribution.  
+
+6. **AttitudeSatisfaction. **The variable is right-skewed and requires exponential processing.  
+
+7. **Price. **This variable is left-skewed and needs to be treated logarithmically. As can be seen from the figure below, the corrected data distribution basically conforms to the normal distribution.  
+
+8. **Days. **This variable basically conforms to the normal distribution and does not need to be processed.   
+  
+```{r,warning=FALSE,echo=FALSE}
+p1 <- ggplot(data = data) + 
+         geom_density(aes(x=Performance)) + 
+         labs(title="The distribution of Performance")
+p2 <- ggplot(data = data) + 
+         geom_density(aes(x=log(Performance))) + 
+         labs(title="The distribution of Performance after rectifying")
+
+p3 <- ggplot(data = data) + 
+         geom_density(aes(x=Letter)) + 
+         labs(title="The distribution of Letter")
+p4 <- ggplot(data = data) + 
+         geom_density(aes(x=log(Letter))) + 
+         labs(title="The distribution of Letter after rectifying")
+
+p5 <- ggplot(data = data) + 
+         geom_density(aes(x=Gift)) + 
+         labs(title="The distribution of Gift")
+p6 <- ggplot(data = data) + 
+         geom_density(aes(x=log(Gift))) + 
+         labs(title="The distribution of Gift after rectifying")
+
+p7 <- ggplot(data = data) + 
+         geom_density(aes(x=Popular)) + 
+         labs(title="The distribution of Popular")
+p8 <- ggplot(data = data) + 
+         geom_density(aes(x=Days)) + 
+         labs(title="The distribution of Days")
+
+p9 <- ggplot(data = data) + 
+         geom_density(aes(x=Article)) + 
+         labs(title="The distribution of Article")
+p10 <- ggplot(data = data) + 
+         geom_density(aes(x=log(Article))) + 
+         labs(title="The distribution of Article after rectifying")
+
+p11 <- ggplot(data = data) + 
+         geom_density(aes(x=AttitudeSatisfaction)) + 
+         labs(title="The distribution of AttitudeSatisfaction")
+p12 <- ggplot(data = data) + 
+         geom_density(aes(x=exp(Performance))) + 
+         labs(title="The distribution of AttitudeSatisfaction after rectifying")
+
+p13 <- ggplot(data = data) + 
+         geom_density(aes(x=Price)) + 
+         labs(title="The distribution of Price")
+p14 <- ggplot(data = data) + 
+         geom_density(aes(x=log(Price))) + 
+         labs(title="The distribution of Priceafter after rectifying")
+
+plot_grid(p1,p2,p3,p4)
+```
+
+``` {r, warning=FALSE, echo=FALSE}
+plot_grid(p5,p6,p7,p8)
+```
+
+``` {r, warning=FALSE, echo=FALSE}
+plot_grid(p9,p10,p11,p12)
+```
+
+``` {r, warning=FALSE, echo=FALSE}
+plot_grid(p13,p14)
+```
+## Multiple linear regression model
+In this part, I use multiple linear regression model to analyze the data. The results are as follows. 
+``` {r, warning=FALSE, echo=FALSE}
+model <- lm(Performance~., data = data)
+summary(model)
+```
+Two conclusions can be drawn from the results. First, the P-value of f-statistic is less than 0.05, indicating that the model is significant. Second, the P-value of independent variable coefficient is less than 0.05, indicating that the coefficient of each variable is significant. Among them, the constant term is not significant, which has little influence on our analysis of influencing factors.  
+## Stepwise multiple linear regression model
+Stepwise regression was further used to test whether there were any variables that could be eliminated. As you can see from the results, there are no variables that go out. This indicates that the overall effect of the model is better.  
+``` {r, warning=FALSE, echo=FALSE}
+step_model <- step(model)
+summary(step_model)
+```
+
+
+# Results 
+From the analysis results, the following conclusions can be drawn:  
+  
+1. The number of thanks letters has a positive impact on the performance of doctors on online healthcare community.  
+  
+2. The number of gifts has a positive impact on the performance of doctors on online healthcare community.  
+  
+3. Popular has a positive effect on the performance of doctors on online healthcare community.  
+
+4. The number of published articles has a positive impact on the performance of doctors on online healthcare community.  
+
+5. Attitude satisfaction has a negative impact on the performance of doctors on online healthcare community.  
+
+6. Service price has a negative impact on the performance of doctors on the online healthcare community.  
+
+7. The opening days have a positive influence on the performance of doctors on online healthcare community.  
+
+
+# Discussion 
+## Conclusion 
+Summarize and evaluate the above results:  
+  
+1. For Letter, Gift and Popular variables, these variables are patient feedback variables.The higher the value of these variables, the better the reputation of the physician, and therefore the higher the performance.  
+  
+2. For the Article variable, the higher the value of this variable, the higher the willingness of doctors to contribute, so it can also promote the improvement of performance.  
+  
+3. For the Price variable, the higher this variable is, the higher doctors' fees are, and the lower patients' purchase intention will be.So it has a negative effect on performance.  
+  
+4. For the Days variable, the higher this variable is, the longer the physician stays open, and therefore the more patients he is exposed to, and the better his performance.  
+
+The above conclusions are very easy to understand. For the variable of Attitude satisfaction, the regression result seems not so easy to understand.As far as common sense and previous studies are concerned, the higher the value of this variable indicates that the better the service attitude of doctors is, which will enhance the reputation and performance of doctors.However, this variable has a negative influence in the regression results.I think it's probably the sample that I picked.I chose a small number of samples, and each doctor tended to get a full score on this value.
+
+## Limitation
+Due to the limitation of research level, this paper has some limitations in the research process:  
+  
+1. Limitations of data sources. The number of data samples obtained in this paper is much smaller than the total number of samples, and the limitation of data volume has a certain obstacle effect on the research  
+  
+2. Limitations of the research model. The reputation evaluation of doctors can be divided into index type and content type. In addition to the quantitative evaluation of patient's thank-you letter, gift and heat, patients can also make a written description of the service content after the telephone consultation, which can be further analyzed in combination with the semantic context in the subsequent research.  
+  
+3. Limitations of research methods. All the data in this paper are from web page capture data. In the future studies, the subjective indicators of doctors and patients can be further refined according to needs by combining questionnaire survey and other methods, and the mutual influence between these factors can be considered to improve the indicator model.
+
+# References 
+
+1. Yan ZJ, Wang TM, et al. Knowledge sharing in online health communities: A social exchange theory perspective[J]. Information & Management, 2016, 53(5):643-653  
+
+2. Jie M G, Gao G, Agarwal R. THE CREATION OF SOCIAL VALUE: CAN AN ONLINE HEALTH COMMUNITY REDUCE RURAL-URBAN HEALTH DISPARITIES?[J] Mis Quarterly, 2016, 40(1):247-263  
+
+3. Yan L, Tan Y, The Consensus Effect in Online Health-Care Communities[J].Journal of Management Information Systems, 2017, 34(1):11-39
+
+4. Yubo Chen, Jinhong Xie. Online Consumer Review: Word-of-Mouth as a New Element of Marketing Communication Mix[J] .Management Science . 2008 (3)  
+ 
+5. Lu Yan,Yong Tan. Feeling Blue? Go Online: An Empirical Study of Social Support Among Patients[J] .  Information Systems Research . 2014,25(4): 690-709  
+
+6. Akerlof G A. The market for “lemons”: Quality Uncertainty and The Market Mechanism[J]. The Quarterly Journal of Economics, 1970,84(3):488-500  
+
+7. Craig Van Slyke, et al. Concern for Information Privacy and Online Consumer Purchasing[J].Journal of the Association for Information System. 2006,7(6): 415-444  
+
+8. Van Oerle, S ; Lievens, A. Value co-creation in online healthcare communities: The impact of patients' reference frames on cure and care[J]. PSYCHOLOGY & MARKETING, 2018,35(9): 629-639  
+
+9. Walters R G, Rinne H J. An empirical investigation into the impact of price promotions on retail store performance[J]. Journal of Retailing, 1986, 62(3) :237-266
+
